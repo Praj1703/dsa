@@ -78,3 +78,52 @@ int main() {
 
     return 0;  // End the program
 }
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<climits>
+using namespace std;
+
+int main(){
+    int n;
+    cout<<"Enter number of nodes:";
+    cin>>n;
+    
+    vector<vector<int>>adjMatrix(n,vector<int>(n));
+    
+    for(int i =0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(i==j){
+                adjMatrix[i][j]=0;
+            }else{
+                int weight;
+                cout<<"Weight from node "<<i+1<<"to node"<<j+1<<":";
+                cin>>weight;
+                adjMatrix[i][j]=(weight==0) ? INT_MAX:weight;
+        }
+    }
+    }
+    for(int k=0;k<n;k++){
+        for(int i =0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(adjMatrix[i][k]!=INT_MAX && adjMatrix[k][j]!=INT_MAX){
+                    adjMatrix[i][j] = min(adjMatrix[i][j],adjMatrix[i][k]+adjMatrix[k][j]);
+                }
+            }
+        }
+    }
+    cout<<"Shortest path:\n";
+    for(int i =0;i<n;i++){
+        for(int j =0;j<n;j++){
+            if(adjMatrix[i][j]==INT_MAX)
+                cout<<"INF";
+            else
+                cout<<adjMatrix[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    return 0;
+}
